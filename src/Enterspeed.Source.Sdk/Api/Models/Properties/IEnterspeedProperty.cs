@@ -4,5 +4,6 @@
     {
         string Name { get; }
         string Type { get; }
+        PropertyValidation Validation { get; }
     }
 }
