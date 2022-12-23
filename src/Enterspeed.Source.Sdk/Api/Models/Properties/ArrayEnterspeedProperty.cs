@@ -1,4 +1,6 @@
-﻿namespace Enterspeed.Source.Sdk.Api.Models.Properties
+﻿using System;
+
+namespace Enterspeed.Source.Sdk.Api.Models.Properties
 {
     public class ArrayEnterspeedProperty : IEnterspeedProperty
     {
@@ -10,6 +12,15 @@
         {
             Name = name;
             Items = items;
+            Validate(items);
+        }
+
+        private void Validate(IEnterspeedProperty[] items)
+        {
+            if (items == null)
+            {
+                throw new ArgumentException("Items assigned to ArrayEnterspeedProperty cannot be null");
+            }
         }
     }
 }

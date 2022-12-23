@@ -1,4 +1,6 @@
-﻿namespace Enterspeed.Source.Sdk.Api.Models.Properties
+﻿using System;
+
+namespace Enterspeed.Source.Sdk.Api.Models.Properties
 {
     public class StringEnterspeedProperty : IEnterspeedProperty
     {
@@ -10,11 +12,21 @@
         {
             Name = name;
             Value = value;
+            Validate(value);
         }
 
         public StringEnterspeedProperty(string value)
         {
             Value = value;
+            Validate(value);
+        }
+
+        private void Validate(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("Value of StringEnterspeedProperty cannot be null");
+            }
         }
     }
 }

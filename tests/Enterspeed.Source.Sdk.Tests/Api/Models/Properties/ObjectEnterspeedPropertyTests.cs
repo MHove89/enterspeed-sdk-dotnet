@@ -42,5 +42,37 @@ namespace Enterspeed.Source.Sdk.Tests.Api.Models.Properties
 
             Assert.NotEmpty(property.Properties);
         }
+
+        [Fact]
+        public void ObjectPropertiesAre_NullAndThrowsException()
+        {
+            bool exceptionThrown = false;
+            try
+            {
+                var property = new ObjectEnterspeedProperty("test", null);
+            }
+            catch (System.Exception)
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.True(exceptionThrown);
+        }
+
+        [Fact]
+        public void ObjectPropertiesAre_NotNullAndDoesNotThrowException()
+        {
+            bool exceptionThrown = false;
+            try
+            {
+                var property = new ObjectEnterspeedProperty("test", new Dictionary<string, IEnterspeedProperty>());
+            }
+            catch (System.Exception)
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.False(exceptionThrown);
+        }
     }
 }

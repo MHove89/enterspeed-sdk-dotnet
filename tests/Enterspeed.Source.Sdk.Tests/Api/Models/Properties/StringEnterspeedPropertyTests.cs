@@ -36,5 +36,37 @@ namespace Enterspeed.Source.Sdk.Tests.Api.Models.Properties
 
             Assert.Equal("value", property.Value);
         }
+
+        [Fact]
+        public void ValueIs_NullAndThrowsException()
+        {
+            bool exceptionThrown = false;
+            try
+            {
+                var property = new StringEnterspeedProperty("test", null);
+            }
+            catch (System.Exception)
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.True(exceptionThrown);
+        }
+
+        [Fact]
+        public void ValueIs_NotNullAndDoesNotThrowException()
+        {
+            bool exceptionThrown = false;
+            try
+            {
+                var property = new StringEnterspeedProperty("test", "testValue");
+            }
+            catch (System.Exception)
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.False(exceptionThrown);
+        }
     }
 }
