@@ -1,6 +1,6 @@
 ﻿namespace Enterspeed.Source.Sdk.Api.Models.Properties
 {
-    public class BooleanEnterspeedProperty : IEnterspeedProperty
+    public class BooleanEnterspeedProperty : BaseEnterspeedProperty, IEnterspeedProperty
     {
         public string Name { get; }
         public string Type => "boolean";

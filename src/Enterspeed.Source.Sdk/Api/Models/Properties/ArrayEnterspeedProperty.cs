@@ -2,7 +2,7 @@
 
 namespace Enterspeed.Source.Sdk.Api.Models.Properties
 {
-    public class ArrayEnterspeedProperty : IEnterspeedProperty
+    public class ArrayEnterspeedProperty : BaseEnterspeedProperty, IEnterspeedProperty
     {
         public string Name { get; }
         public string Type => "array";
@@ -19,7 +19,8 @@ namespace Enterspeed.Source.Sdk.Api.Models.Properties
         {
             if (items == null)
             {
-                throw new ArgumentException("Items assigned to ArrayEnterspeedProperty cannot be null");
+                Validation.IsValid = false;
+                Validation.Errors.Add("Items assigned to ArrayEnterspeedProperty cannot be null");
             }
         }
     }

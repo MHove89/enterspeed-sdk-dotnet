@@ -1,4 +1,5 @@
-﻿using Enterspeed.Source.Sdk.Api.Models.Properties;
+﻿using System.Linq;
+using Enterspeed.Source.Sdk.Api.Models.Properties;
 using Xunit;
 
 namespace Enterspeed.Source.Sdk.Tests.Api.Models.Properties
@@ -40,33 +41,18 @@ namespace Enterspeed.Source.Sdk.Tests.Api.Models.Properties
         [Fact]
         public void ValueIs_NullAndThrowsException()
         {
-            bool exceptionThrown = false;
-            try
-            {
-                var property = new StringEnterspeedProperty("test", null);
-            }
-            catch (System.Exception)
-            {
-                exceptionThrown = true;
-            }
+            var property = new StringEnterspeedProperty("test", null);
 
-            Assert.True(exceptionThrown);
+            Assert.False(property.Validation.IsValid);
+            Assert.Contains("Value of StringEnterspeedProperty cannot be null", property.Validation.Errors.FirstOrDefault());
         }
 
         [Fact]
         public void ValueIs_NotNullAndDoesNotThrowException()
         {
-            bool exceptionThrown = false;
-            try
-            {
-                var property = new StringEnterspeedProperty("test", "testValue");
-            }
-            catch (System.Exception)
-            {
-                exceptionThrown = true;
-            }
+            var property = new StringEnterspeedProperty("test", "testValue");
 
-            Assert.False(exceptionThrown);
+            Assert.True(property.Validation.IsValid);
         }
     }
 }

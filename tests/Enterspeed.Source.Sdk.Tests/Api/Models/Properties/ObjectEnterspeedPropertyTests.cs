@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Enterspeed.Source.Sdk.Api.Models.Properties;
 using Xunit;
 
@@ -46,33 +47,18 @@ namespace Enterspeed.Source.Sdk.Tests.Api.Models.Properties
         [Fact]
         public void ObjectPropertiesAre_NullAndThrowsException()
         {
-            bool exceptionThrown = false;
-            try
-            {
-                var property = new ObjectEnterspeedProperty("test", null);
-            }
-            catch (System.Exception)
-            {
-                exceptionThrown = true;
-            }
+            var property = new ObjectEnterspeedProperty("test", null);
 
-            Assert.True(exceptionThrown);
+            Assert.False(property.Validation.IsValid);
+            Assert.Contains("Properties assigned to ObjectEnterspeedProperty cannot be null", property.Validation.Errors.FirstOrDefault());
         }
 
         [Fact]
         public void ObjectPropertiesAre_NotNullAndDoesNotThrowException()
         {
-            bool exceptionThrown = false;
-            try
-            {
-                var property = new ObjectEnterspeedProperty("test", new Dictionary<string, IEnterspeedProperty>());
-            }
-            catch (System.Exception)
-            {
-                exceptionThrown = true;
-            }
+            var property = new ObjectEnterspeedProperty("test", new Dictionary<string, IEnterspeedProperty>());
 
-            Assert.False(exceptionThrown);
+            Assert.True(property.Validation.IsValid);
         }
     }
 }

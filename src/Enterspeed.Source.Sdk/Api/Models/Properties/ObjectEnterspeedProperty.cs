@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Enterspeed.Source.Sdk.Api.Models.Properties
 {
-    public class ObjectEnterspeedProperty : IEnterspeedProperty
+    public class ObjectEnterspeedProperty : BaseEnterspeedProperty, IEnterspeedProperty
     {
         public string Name { get; }
         public string Type => "object";
@@ -26,7 +26,8 @@ namespace Enterspeed.Source.Sdk.Api.Models.Properties
         {
             if (properties == null)
             {
-                throw new ArgumentException("Properties assigned to ObjectEnterspeedProperty cannot be null");
+                Validation.IsValid = false;
+                Validation.Errors.Add("Properties assigned to ObjectEnterspeedProperty cannot be null");
             }
         }
     }

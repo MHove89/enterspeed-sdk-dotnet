@@ -2,7 +2,7 @@
 
 namespace Enterspeed.Source.Sdk.Api.Models.Properties
 {
-    public class StringEnterspeedProperty : IEnterspeedProperty
+    public class StringEnterspeedProperty : BaseEnterspeedProperty, IEnterspeedProperty
     {
         public string Name { get; }
         public string Type => "string";
@@ -25,7 +25,8 @@ namespace Enterspeed.Source.Sdk.Api.Models.Properties
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentException("Value of StringEnterspeedProperty cannot be null");
+                Validation.IsValid = false;
+                Validation.Errors.Add("Value of StringEnterspeedProperty cannot be null");
             }
         }
     }

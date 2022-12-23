@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Enterspeed.Source.Sdk.Api.Models.Properties
 {
-    public class NumberEnterspeedProperty : IEnterspeedProperty
+    public class NumberEnterspeedProperty : BaseEnterspeedProperty, IEnterspeedProperty
     {
         public string Name { get; }
         public string Type => "number";
